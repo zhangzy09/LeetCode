@@ -31,6 +31,4 @@ if __name__='__main__':
     nums=[2,7,11,15]
     target=9
     assert Solution().twoSum(nums,target)=[0,1]
-    nums2=[3,2,4]
-    target2=6
-    assert Solution().twoSum(nums,target)=[1,2]
+
