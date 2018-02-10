@@ -9,7 +9,8 @@ Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
 
-#思路：
+#思路：使用一个临时变量（这个临时变量也是ListNode）进行操作，carry表示进位，依次对链表进行操作，如果两者第一位相加大于10，临时变量取carry除以10的
+余数，再利用carry除以10的整数部分进行循环运算。
 
 Python code:
 # Definition for singly-linked list.
@@ -25,3 +26,17 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
+        solution=temp=ListNode(0)
+        carry=0
+        while l1 or l2 or carry:
+            if l1:
+                carry+=l1.val
+                l1=l1.next
+            if l2:
+                carry+=l2.val
+                l2=l2.next
+            temp.next=ListNode(carry%10)
+            temp=temp.next
+            carry//=10
+        return solution.next
+                
