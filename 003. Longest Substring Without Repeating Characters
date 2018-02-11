@@ -1,0 +1,32 @@
+003. Longest Substring Without Repeating Characters
+
+Given a string, find the length of the longest substring without repeating characters.
+
+Examples:
+
+Given "abcabcbb", the answer is "abc", which the length is 3.
+
+Given "bbbbb", the answer is "b", with the length of 1.
+
+Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+#思路：临时字典中的key值表示s中的字母，其value为出现的序数，如果字母出现在过tempdict中，且开始计长的start小于其序数，则更新start，否则就更新最大长度
+maxlen。完成循环后的maxlen即为所求
+
+python code：
+class Solution:
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        tempdict={}
+        maxlen=start=0
+        for i,j in enumerate(s):
+            if j in tempdict and start<=tempdict[j]:
+                start=tempdict[j]+1
+            else:
+                maxlen=max(maxlen,i-start+1)
+            tempdict[j] = i
+        return maxlen
+
