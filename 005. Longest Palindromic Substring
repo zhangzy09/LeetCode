@@ -1,0 +1,35 @@
+005. Longest Palindromic Substring
+
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example:
+Input: "babad"
+Output: "bab"
+
+Note: "aba" is also a valid answer.
+
+
+#思路：需要一个finder函数，用于挖掘出回文（奇数长度由第i个开始向两边搜索，偶数长度从i和i+1个开始分别向左向右搜索）。遍历字符串的所有点作为初始点搜索，并
+比较所有的待定子回文字符串，选出最长的即为所求的longest palindromic substring。
+
+
+python code：
+class Solution:
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        target=''
+        for i in range(len(s)):
+            target=max(self.finder(s,i,i),self.finder(s,i,i+1),target,key=len)
+        return target
+            
+    def finder(self,s,m,n):
+        while m>=0 and n<len(s) and s[m]==s[n]:
+            m-=1
+            n+=1
+        return s[m+1:n]
+            
+            
+            
